@@ -5,7 +5,7 @@ import { MdOutlineEmail } from "react-icons/md";
 
 function Footer() {
   return (
-    <div className="w-full h-28 flex items-center justify-between mt-10   pt-10 border-t-2 border-zinc-600">
+    <div className="w-full h-18 flex items-center justify-between mt-10   pt-5 pb-2 border-t-2 border-zinc-600">
       <div className="text-zinc-500">@2024</div>
       <div className="flex gap-4 ">
         <button
