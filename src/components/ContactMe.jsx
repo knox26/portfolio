@@ -44,7 +44,7 @@ const ContactMe = () => {
   };
 
   return (
-    <div className="w-full h-[75vh] mt-14 ">
+    <div className="w-full h-[72vh] mt-14 ">
       <div className="p-6  max-w-md mx-auto">
         <h1 className="text-center text-3xl font-semibold mb-10">Contact Me</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
