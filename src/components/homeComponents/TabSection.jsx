@@ -35,6 +35,14 @@ const education = [
 
 const projects = [
   {
+    title: "Uber - Microservices",
+    description:
+      "A microservices-based ride-hailing platform with User, Captain, Ride, and Gateway services. RabbitMQ facilitates communication between the Ride and Captain services for efficient message handling.",
+    stack: [<SiNodedotjs />, <SiExpress />, <SiMongodb />, <SiJsonwebtokens />],
+
+    githubLink: "https://github.com/knox26/Uber-micro-services",
+  },
+  {
     title: "Talk-Verse",
     description:
       "Talk-Verse is a real-time chatting platform where users can send messages, share files or images, and form group chats for multiple users. It’s simple, efficient, and supports secure communication.",
@@ -95,18 +103,22 @@ function TabSection() {
                     {edu.stack}
                   </span>
                   <span className="pt-4 text-md tracking-wide flex gap-2 ">
-                    <button
-                      className=" rounded-lg p-1 hover:text-blue-500 text-white  border-2 border-zinc-800 hover:bg-zinc-900 hover:border-zinc-900  "
-                      onClick={() => window.open(edu.liveLink, "_blank")}
-                    >
-                      <FaLink className="text-xl" />
-                    </button>
-                    <button
-                      className="border-2 hover:text-blue-500 text-white border-zinc-800 rounded-lg p-1 hover:bg-zinc-900 hover:border-zinc-900 "
-                      onClick={() => window.open(edu.githubLink, "_blank")}
-                    >
-                      <SiGithub className="text-xl" />
-                    </button>
+                    {edu.liveLink && (
+                      <button
+                        className=" rounded-lg p-1 hover:text-blue-500 text-white  border-2 border-zinc-800 hover:bg-zinc-900 hover:border-zinc-900  "
+                        onClick={() => window.open(edu.liveLink, "_blank")}
+                      >
+                        <FaLink className="text-xl" />
+                      </button>
+                    )}
+                    {edu.githubLink && (
+                      <button
+                        className="border-2 hover:text-blue-500 text-white border-zinc-800 rounded-lg p-1 hover:bg-zinc-900 hover:border-zinc-900 "
+                        onClick={() => window.open(edu.githubLink, "_blank")}
+                      >
+                        <SiGithub className="text-xl" />
+                      </button>
+                    )}
                   </span>
                 </div>
               </div>
