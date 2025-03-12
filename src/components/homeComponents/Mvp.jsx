@@ -14,11 +14,11 @@ function Mvp() {
         </div>
         <div className="md:w-[71%] pt-4 flex flex-col ">
           <div className=" flex justify-center text-xl xs:text-2xl  md:hidden">
-            hi Bhavitavya here 👋
+            hi, Bhavitavya here 👋
           </div>
           <div className="hidden md:block">
             <div className=" flex justify-center   md:justify-start text-5xl">
-              hi Bhavitavya{" "}
+              hi, Bhavitavya
             </div>
             <div className=" flex justify-center    md:justify-start text-5xl">
               here 👋

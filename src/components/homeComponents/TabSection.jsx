@@ -35,6 +35,21 @@ const education = [
 
 const projects = [
   {
+    title: "Soulmegle",
+    description:
+      "SoulMegle is a random video chat app like Omegle, enabling real-time video calls and messaging with strangers. Uses WebRTC",
+    stack: [
+      <SiReact />,
+      <SiNodedotjs />,
+      <SiExpress />,
+      <SiMongodb />,
+      <SiJsonwebtokens />,
+      <ChevronsLeftRightEllipsis />
+    ],
+    liveLink: "https://vision-1-lus9.onrender.com",
+    githubLink: "https://github.com/knox26/Vision-1",
+  },
+  {
     title: "Uber - Microservices",
     description:
       "A microservices-based ride-hailing platform with User, Captain, Ride, and Gateway services. RabbitMQ facilitates communication between the Ride and Captain services for efficient message handling.",
