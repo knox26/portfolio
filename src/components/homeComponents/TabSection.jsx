@@ -15,6 +15,7 @@ import {
   SiTradingview,
   SiGithub,
 } from "react-icons/si";
+import { ChevronsLeftRightEllipsis } from "lucide-react";
 const education = [
   {
     year: "2021 - 2024",
