@@ -24,7 +24,7 @@ const education = [
   },
   {
     year: "2019 - 2020",
-    degree: "XII - PCMB",
+    degree: "XII - Science",
     college: "Dr. Balasaheb Vikhe Patil Junior College, Ahmednagar",
   },
   {
