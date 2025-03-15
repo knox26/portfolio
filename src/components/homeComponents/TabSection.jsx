@@ -45,7 +45,7 @@ const projects = [
       <SiExpress />,
       <SiMongodb />,
       <SiJsonwebtokens />,
-      <ChevronsLeftRightEllipsis />
+      <ChevronsLeftRightEllipsis />,
     ],
     liveLink: "https://vision-1-lus9.onrender.com",
     githubLink: "https://github.com/knox26/Vision-1",
@@ -70,7 +70,7 @@ const projects = [
       <SiJsonwebtokens />,
     ],
     liveLink: "https://talk-verse.onrender.com",
-    githubLink: "https://github.com/knox26/sync-chat-app",
+    githubLink: "https://github.com/knox26/Talk-Verse",
   },
   {
     title: "Stock-X",
