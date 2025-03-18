@@ -33,7 +33,7 @@ function Mvp() {
               className=" py-1 px-2 rounded-lg flex justify-center items-center gap-1 tracking-tight hover:text-white text-zinc-500  "
               onClick={() =>
                 window.open(
-                  "https://drive.google.com/file/d/12pTWY6dKdBVwQi9UeimG9-0jLFw5YlcQ/view?usp=drivesdk",
+                  "https://drive.google.com/file/d/1XYl0NSrEh0vFrSFzQNzhesdfyh-KAJ_A/view?usp=sharing",
                   "_blank"
                 )
               }
