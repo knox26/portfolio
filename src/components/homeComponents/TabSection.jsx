@@ -3,7 +3,7 @@ import { LuUser, LuFolder } from "react-icons/lu";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { FaCircle, FaYahoo } from "react-icons/fa";
 import { FaLink } from "react-icons/fa6";
-
+import Tcs from "@/assets/tcs3.png"; // Fixed file extension typo
 import {
   SiMongodb,
   SiExpress,
@@ -16,21 +16,36 @@ import {
   SiGithub,
 } from "react-icons/si";
 import { ChevronsLeftRightEllipsis } from "lucide-react";
+
+const tabHeader = [
+  { name: "Experience" },
+  { name: "Projects" },
+  { name: "Education" },
+];
+
 const education = [
   {
     year: "2021 - 2024",
-    degree: "BE - Information technology",
+    degree: "Bachelor in Engineering - Information Technology",
     college: "Smt Kashibai Navle College of Engineering, Pune",
   },
   {
     year: "2019 - 2020",
-    degree: "XII - Science",
+    degree: "12th - Science",
     college: "Dr. Balasaheb Vikhe Patil Junior College, Ahmednagar",
   },
   {
     year: "2017 - 2018",
-    degree: "X",
+    degree: "10th",
     college: "Residential Highschool, Ahmednagar",
+  },
+];
+
+const experience = [
+  {
+    post: "Assistant System Engineer Trainee",
+    company: "Tata Consultancy Services",
+    year: "April 2025 - Present",
   },
 ];
 
@@ -84,24 +99,47 @@ const projects = [
 function TabSection() {
   return (
     <div className="flex items-center justify-center w-full mt-10 ">
-      <Tabs className="w-full h-full " defaultValue="projects">
+      <Tabs className="w-full h-full " defaultValue="experience">
         <div className=" flex justify-center items-center  mx-[25%]">
           <TabsList className="bg-transperent rounded-lg w-full  ">
-            <TabsTrigger
-              value="projects"
-              className="data-[state=active]:bg-transparent text-white text-opacity-90 border-b-2 rounded-none w-full data-[state=active]:text-white data-[state=active]:font-semibold data-[state=active]:border-b-purple-500 p-3 transition-all duration-500 tracking-widest text-xl md:text-2xl"
-            >
-              Projects
-            </TabsTrigger>
-            <TabsTrigger
-              value="education"
-              className="data-[state=active]:bg-transparent text-white text-opacity-90 border-b-2 rounded-none w-full data-[state=active]:text-white data-[state=active]:font-semibold data-[state=active]:border-b-purple-500 p-3 transition-all duration-500 tracking-widest text-xl md:text-2xl"
-            >
-              Education
-            </TabsTrigger>
+            {tabHeader.map((header, idx) => (
+              <TabsTrigger
+                key={idx}
+                value={header.name.toLowerCase()}
+                className="data-[state=active]:bg-transparent text-white text-opacity-90 border-b-2 rounded-none w-full data-[state=active]:text-white data-[state=active]:font-semibold data-[state=active]:border-b-purple-500 p-3 transition-all duration-500 tracking-widest text-xl md:text-2xl"
+              >
+                {header.name}
+              </TabsTrigger>
+            ))}
           </TabsList>
         </div>
         <div className="mt-10  w-full border rounded-xl">
+          <TabsContent className="relative pt-8" value="experience">
+            {experience.map((edu, id) => (
+              <div key={id} className="pt-4 flex bg-transparent">
+                <div className="mt-2 w-[20%] h-full flex items-center justify-center text-lg text-zinc-800 rounded-full">
+                  <div className=" bg-zinc-900 rounded-full p-2">
+                  <img src={Tcs} alt="Profile" className=" h-7" />
+                  </div>
+                </div>
+                <div className={`w-[80%] flex flex-col justify-center pb-5`}>
+                  <span className="text-xl md:text-2xl pb-3 text-white/80">
+                    {edu.post}
+                  </span>
+                  <span className="text-sm md:text-md tracking-wide text-white/60">
+                    {edu.company}
+                  </span>
+                  <span className="text-sm tracking-wide text-white/60">
+                    {edu.year}{" "}
+                  </span>
+                </div>
+              </div>
+            ))}
+            <div className="absolute flex items-center justify-center py-7  top-0 left-0 z-[-1] h-full w-[20%] bg-trnasparent">
+              {/*  pt-14 pb-20 remove line from top dot and bootom dot */}
+              <div className="  h-full w-1 bg-zinc-900"></div>
+            </div>
+          </TabsContent>
           <TabsContent className="pt-8 relative " value="projects">
             {projects.map((edu, id) => (
               <div key={id} className="pt-4 flex bg-transparent">
@@ -141,7 +179,7 @@ function TabSection() {
             ))}
             <div className="absolute flex items-center justify-center py-7  top-0 left-0 z-[-1] h-full w-[20%] bg-trnasparent">
               {/*  pt-14 pb-20 remove line from top dot and bootom dot */}
-              <div className=" h-full w-1 bg-zinc-800"></div>
+              <div className=" h-full w-1 bg-zinc-900"></div>
             </div>
           </TabsContent>
 
@@ -166,7 +204,7 @@ function TabSection() {
             ))}
             <div className="absolute flex items-center justify-center py-7  top-0 left-0 z-[-1] h-full w-[20%] bg-trnasparent">
               {/*  pt-14 pb-20 remove line from top dot and bootom dot */}
-              <div className="  h-full w-1 bg-zinc-800"></div>
+              <div className="  h-full w-1 bg-zinc-900"></div>
             </div>
           </TabsContent>
         </div>
