@@ -1,1 +1,15 @@
 node_modules
+# Added by code-review-graph
+.code-review-graph/
+# AI / editor / agent config files
+.claude/
+.cursorrules
+.mcp.json
+.opencode.json
+.windsurfrules
+AGENTS.md
+CLAUDE.md
+CODE_REVIEW.md
+GEMINI.md
+
+

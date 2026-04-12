@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
@@ -11,8 +11,18 @@ const ContactMe = () => {
     formState: { errors },
   } = useForm();
   const [status, setStatus] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (!status) return;
+    const timer = setTimeout(() => {
+      setStatus("");
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, [status]);
 
   const onSubmit = async (data) => {
+    setIsSubmitting(true);
     setStatus("Sending...");
 
     try {
@@ -37,9 +47,7 @@ const ContactMe = () => {
     } catch (error) {
       setStatus("Failed to send message. Please try again later.");
     } finally {
-      setTimeout(() => {
-        setStatus("");
-      }, 5000);
+      setIsSubmitting(false);
     }
   };
 
@@ -95,9 +103,10 @@ const ContactMe = () => {
 
           <button
             type="submit"
-            className="py-2 px-4 bg-purple-950 text-white rounded hover:bg-purple-950/70 transition"
+            disabled={isSubmitting}
+            className="py-2 px-4 bg-purple-950 text-white rounded hover:bg-purple-950/70 transition disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Send Message
+            {isSubmitting ? "Sending..." : "Send Message"}
           </button>
         </form>
         {status && <p className="text-center text-sm mt-4">{status}</p>}
