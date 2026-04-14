@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
+import { FadeIn } from "./ui/fade-in";
+import { Send } from "lucide-react";
 
 const ContactMe = () => {
   const {
@@ -52,19 +54,26 @@ const ContactMe = () => {
   };
 
   return (
-    <div className="w-full h-[72vh] mt-14 ">
-      <div className="p-6  max-w-md mx-auto">
-        <h1 className="text-center text-3xl font-semibold mb-10">Contact Me</h1>
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
+    <FadeIn className="w-full mt-24 mb-20 flex justify-center">
+      <div className="w-full max-w-md p-8 rounded-3xl bg-zinc-900/40 border border-white/5 backdrop-blur-xl relative overflow-hidden">
+        {/* Glow effect */}
+        <div className="absolute -top-24 -right-24 w-48 h-48 bg-purple-500/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-blue-500/20 rounded-full blur-3xl pointer-events-none" />
+
+        <h1 className="text-center text-4xl font-bold tracking-tight text-white mb-8 relative z-10">
+          Get in touch
+        </h1>
+        
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6 relative z-10">
           <div>
             <Input
               type="text"
               {...register("name", { required: "Name is required" })}
               placeholder="Your Name"
-              className="w-full"
+              className="w-full bg-zinc-950/50 border-white/10 focus-visible:ring-1 focus-visible:ring-blue-500/50 text-white h-12 rounded-xl transition-all"
             />
             {errors.name && (
-              <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
+              <p className="text-red-400 text-xs mt-2 ml-1">{errors.name.message}</p>
             )}
           </div>
 
@@ -79,10 +88,10 @@ const ContactMe = () => {
                 },
               })}
               placeholder="Your Email"
-              className="w-full"
+              className="w-full bg-zinc-950/50 border-white/10 focus-visible:ring-1 focus-visible:ring-blue-500/50 text-white h-12 rounded-xl transition-all"
             />
             {errors.email && (
-              <p className="text-red-500 text-sm mt-1">
+              <p className="text-red-400 text-xs mt-2 ml-1">
                 {errors.email.message}
               </p>
             )}
@@ -92,10 +101,10 @@ const ContactMe = () => {
             <Textarea
               {...register("message", { required: "Message is required" })}
               placeholder="Type your message here."
-              className="w-full"
+              className="w-full bg-zinc-950/50 border-white/10 focus-visible:ring-1 focus-visible:ring-blue-500/50 text-white min-h-[120px] rounded-xl transition-all resize-none"
             />
             {errors.message && (
-              <p className="text-red-500 text-sm mt-1">
+              <p className="text-red-400 text-xs mt-2 ml-1">
                 {errors.message.message}
               </p>
             )}
@@ -104,14 +113,18 @@ const ContactMe = () => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="py-2 px-4 bg-purple-950 text-white rounded hover:bg-purple-950/70 transition disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-white text-zinc-950 font-semibold rounded-xl hover:bg-zinc-200 transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:hover:scale-100 disabled:cursor-not-allowed mt-2"
           >
-            {isSubmitting ? "Sending..." : "Send Message"}
+            {isSubmitting ? "Sending..." : (
+              <>
+                Send Message <Send size={16} />
+              </>
+            )}
           </button>
         </form>
-        {status && <p className="text-center text-sm mt-4">{status}</p>}
+        {status && <p className="text-center text-sm mt-6 text-zinc-400 relative z-10">{status}</p>}
       </div>
-    </div>
+    </FadeIn>
   );
 };
 

@@ -1,140 +1,171 @@
-import React from "react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { FaCircle } from "react-icons/fa";
-import { FaLink } from "react-icons/fa6";
-import Tcs from "@/assets/tcs3.png"; // Fixed file extension typo
-import { SiGithub } from "react-icons/si";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Link, Briefcase, GraduationCap, Code2, ExternalLink, Github } from "lucide-react";
+import Tcs from "@/assets/tcs3.png";
 import { education, experience, projects } from "../../lib/constants";
+import { FadeIn } from "../ui/fade-in";
 
 const tabHeader = [
-  { id: "tab-exp", name: "Experience" },
-  { id: "tab-proj", name: "Projects" },
-  { id: "tab-edu", name: "Education" },
+  { id: "experience", name: "Experience", icon: Briefcase },
+  { id: "projects", name: "Projects", icon: Code2 },
+  { id: "education", name: "Education", icon: GraduationCap },
 ];
 
-const TimelineItem = ({ icon, title, subtitle, date, children }) => (
-  <div className="pt-4 flex bg-transparent">
-    <div className="mt-2 w-[20%] h-full flex items-center justify-center text-lg text-zinc-800 rounded-full">
-      {icon}
+const TimelineCard = ({ icon, title, subtitle, date, children }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: -20 }}
+    transition={{ duration: 0.4 }}
+    className="relative p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md mb-6 overflow-hidden group hover:bg-white/10 transition-colors"
+  >
+    <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+    <div className="flex items-start gap-4 relative z-10">
+      <div className="flex-shrink-0 w-12 h-12 rounded-full bg-zinc-900 border border-white/20 flex items-center justify-center text-zinc-300">
+        {icon}
+      </div>
+      <div className="flex-grow">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-1">
+          <h3 className="text-xl font-semibold text-zinc-100 group-hover:text-blue-400 transition-colors">
+            {title}
+          </h3>
+          {date && (
+            <span className="text-sm font-medium text-zinc-500 bg-zinc-900 px-3 py-1 rounded-full border border-white/5 whitespace-nowrap">
+              {date}
+            </span>
+          )}
+        </div>
+        {subtitle && <p className="text-zinc-400 mb-3 text-sm md:text-base leading-relaxed">{subtitle}</p>}
+        {children}
+      </div>
     </div>
-    <div className="w-[80%] flex flex-col justify-center pb-5">
-      <span className="text-xl md:text-2xl pb-3 text-white/80">{title}</span>
-      {subtitle && (
-        <span className="text-sm md:text-lg tracking-wide text-white/60 pr-2 md:pr-0">
-          {subtitle}
-        </span>
-      )}
-      {date && (
-        <span className="text-sm tracking-wide text-white/60">{date}</span>
-      )}
-      {children}
-    </div>
-  </div>
+  </motion.div>
 );
 
 function TabSection() {
+  const [activeTab, setActiveTab] = useState("experience");
+
   return (
-    <div className="flex items-center justify-center w-full mt-10 ">
-      <Tabs className="w-full h-full " defaultValue="experience">
-        <div className=" flex justify-center items-center  mx-[25%]">
-          <TabsList className="bg-transperent rounded-lg w-full  ">
-            {tabHeader.map((header) => (
-              <TabsTrigger
-                key={header.id}
-                value={header.name.toLowerCase()}
-                className="data-[state=active]:bg-transparent text-white text-opacity-90 border-b-2 rounded-none w-full data-[state=active]:text-white data-[state=active]:font-semibold data-[state=active]:border-b-purple-500 p-3 transition-all duration-500 tracking-widest text-xl md:text-2xl"
+    <FadeIn className="w-full mt-20 md:mt-32 max-w-4xl mx-auto">
+      <div className="flex flex-col items-center w-full">
+        
+        {/* Custom Framer Motion Tabs */}
+        <div className="flex p-1 space-x-1 bg-zinc-900/50 backdrop-blur-md rounded-2xl border border-white/10 mb-10 w-full sm:w-auto overflow-x-auto select-none">
+          {tabHeader.map((tab) => {
+            const Icon = tab.icon;
+            const isActive = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`relative flex items-center gap-2 px-6 py-3 rounded-xl text-sm md:text-base font-medium transition-colors outline-none whitespace-nowrap ${
+                  isActive ? "text-white" : "text-zinc-500 hover:text-zinc-300"
+                }`}
               >
-                {header.name}
-              </TabsTrigger>
-            ))}
-          </TabsList>
-        </div>
-        <div className="mt-10  w-full border rounded-xl">
-          <TabsContent className="relative pt-8" value="experience">
-            {experience.map((edu) => (
-              <TimelineItem
-                key={edu.id}
-                icon={
-                  <div className="bg-zinc-900 rounded-full p-2">
-                    <img
-                      src={Tcs}
-                      alt="TCS Logo"
-                      width={28}
-                      height={28}
-                      loading="lazy"
-                      className="h-7 w-auto"
-                    />
-                  </div>
-                }
-                title={edu.post}
-                subtitle={edu.company}
-                date={edu.year}
-              />
-            ))}
-            <div className="absolute flex items-center justify-center py-7  top-0 left-0 z-[-1] h-full w-[20%] bg-trnasparent">
-              <div className="  h-full w-1 bg-zinc-900"></div>
-            </div>
-          </TabsContent>
-
-          <TabsContent className="pt-8 relative " value="projects">
-            {projects.map((edu) => (
-              <TimelineItem
-                key={edu.id}
-                icon={<FaCircle />}
-                title={edu.title}
-                subtitle={edu.description}
-              >
-                <span className="pt-4 text-xl tracking-wide text-white/70 flex gap-2">
-                  {edu.stack}
+                {isActive && (
+                  <motion.div
+                    layoutId="activeTabBadge"
+                    className="absolute inset-0 bg-white/10 border border-white/20 rounded-xl"
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                  />
+                )}
+                <span className="relative z-10 flex items-center gap-2">
+                  <Icon size={18} />
+                  {tab.name}
                 </span>
-                <span className="pt-4 text-md tracking-wide flex gap-2 ">
-                  {edu.liveLink && (
-                    <a
-                      href={edu.liveLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`Live Demo of ${edu.title}`}
-                      className=" rounded-lg p-1 hover:text-blue-500 text-white  border-2 border-zinc-800 hover:bg-zinc-900 hover:border-zinc-900  "
-                    >
-                      <FaLink className="text-xl" aria-hidden="true" />
-                    </a>
-                  )}
-                  {edu.githubLink && (
-                    <a
-                      href={edu.githubLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`GitHub Repo for ${edu.title}`}
-                      className="border-2 hover:text-blue-500 text-white border-zinc-800 rounded-lg p-1 hover:bg-zinc-900 hover:border-zinc-900 "
-                    >
-                      <SiGithub className="text-xl" aria-hidden="true" />
-                    </a>
-                  )}
-                </span>
-              </TimelineItem>
-            ))}
-            <div className="absolute flex items-center justify-center py-7  top-0 left-0 z-[-1] h-full w-[20%] bg-trnasparent">
-              <div className=" h-full w-1 bg-zinc-900"></div>
-            </div>
-          </TabsContent>
-
-          <TabsContent className="relative pt-8" value="education">
-            {education.map((edu) => (
-              <TimelineItem
-                key={edu.id}
-                icon={<FaCircle />}
-                title={edu.college}
-                subtitle={edu.degree}
-                date={edu.year}
-              />
-            ))}
-            <div className="absolute flex items-center justify-center py-7  top-0 left-0 z-[-1] h-full w-[20%] bg-trnasparent">
-              <div className="  h-full w-1 bg-zinc-900"></div>
-            </div>
-          </TabsContent>
+              </button>
+            );
+          })}
         </div>
-      </Tabs>
-    </div>
+
+        {/* Tab Content with AnimatePresence */}
+        <div className="w-full relative min-h-[400px]">
+          <AnimatePresence mode="wait">
+            
+            {activeTab === "experience" && (
+              <motion.div key="exp" className="w-full">
+                {experience.map((exp) => (
+                  <TimelineCard
+                    key={exp.id}
+                    icon={
+                      <img src={Tcs} alt="TCS Logo" width={24} height={24} className="opacity-90" />
+                    }
+                    title={exp.post}
+                    subtitle={exp.company}
+                    date={exp.year}
+                  />
+                ))}
+              </motion.div>
+            )}
+
+            {activeTab === "projects" && (
+              <motion.div key="proj" className="w-full">
+                {projects.map((proj) => (
+                  <TimelineCard
+                    key={proj.id}
+                    icon={<Code2 size={24} />}
+                    title={proj.title}
+                    subtitle={proj.description}
+                  >
+                    <div className="flex flex-wrap items-center gap-4 mt-4">
+                      {/* Stack Badges */}
+                      <div className="flex flex-wrap gap-2 text-xl text-zinc-400">
+                        {proj.stack.map((icon, i) => (
+                          <span key={i} className="p-2 bg-zinc-800/50 border border-white/5 rounded-lg flex items-center justify-center hover:text-white hover:bg-zinc-800 transition-colors">
+                            {icon}
+                          </span>
+                        ))}
+                      </div>
+                      
+                      <div className="flex-grow" />
+
+                      {/* Links */}
+                      <div className="flex gap-2">
+                        {proj.liveLink && (
+                          <a
+                            href={proj.liveLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-1.5 px-3 py-1.5 text-sm bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 text-white rounded-lg transition-all"
+                          >
+                            <ExternalLink size={16} /> Live
+                          </a>
+                        )}
+                        {proj.githubLink && (
+                          <a
+                            href={proj.githubLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-1.5 px-3 py-1.5 text-sm bg-zinc-900 border border-white/10 hover:bg-zinc-800 hover:border-white/20 text-white rounded-lg transition-all"
+                          >
+                            <Github size={16} /> Code
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </TimelineCard>
+                ))}
+              </motion.div>
+            )}
+
+            {activeTab === "education" && (
+              <motion.div key="edu" className="w-full">
+                {education.map((edu) => (
+                  <TimelineCard
+                    key={edu.id}
+                    icon={<GraduationCap size={24} />}
+                    title={edu.college}
+                    subtitle={edu.degree}
+                    date={edu.year}
+                  />
+                ))}
+              </motion.div>
+            )}
+
+          </AnimatePresence>
+        </div>
+      </div>
+    </FadeIn>
   );
 }
 
