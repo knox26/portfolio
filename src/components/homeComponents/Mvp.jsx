@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import bhaviImage from "@/assets/bhavi5.jpg";
+import bhaviImage from "@/assets/Bhavitavya.png";
 import { FileText, Linkedin, Github, Mail } from "lucide-react";
 
 function Mvp() {
@@ -95,16 +95,44 @@ function Mvp() {
         initial={{ opacity: 0, scale: 0.9, filter: "blur(10px)", y: 0 }}
         animate={{ opacity: 1, scale: 1, filter: "blur(0px)", y: -40 }}
         transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-        className="w-48 h-48 md:w-[320px] md:h-[320px] relative z-10"
+        className="w-48 md:w-[320px] relative z-10 group"
       >
-        <div className="absolute inset-0 bg-gradient-to-tr from-blue-500 to-purple-500 rounded-3xl blur-xl opacity-20 animate-pulse" />
-        <img
-          src={bhaviImage}
-          alt="Profile picture of Bhavitavya"
-          width={320}
-          height={320}
-          loading="eager"
-          className="w-full h-full object-cover rounded-3xl border border-white/10 shadow-2xl relative z-10"
+        {/* Infinite Levitating Component */}
+        <motion.div
+           animate={{ y: [-12, 12, -12] }}
+           transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+           className="relative"
+        >
+          {/* Animated Gradient Glow Border Backdrop */}
+          <motion.div
+            animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+            className="absolute -inset-[3px] rounded-[2rem] bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 bg-[length:200%_200%] opacity-40 blur-md group-hover:opacity-70 transition-opacity duration-500"
+          />
+          {/* Tight Solid Animated Border */}
+          <motion.div
+            animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+            className="absolute -inset-[2px] rounded-[2rem] bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 bg-[length:200%_200%]"
+          />
+          
+          {/* Core Image Container */}
+          <div className="relative bg-zinc-950 p-[3px] rounded-[2rem] overflow-hidden">
+            <img
+              src={bhaviImage}
+              alt="Profile picture of Bhavitavya"
+              width={320}
+              loading="eager"
+              className="w-full aspect-[8/9] object-cover object-top rounded-[1.8rem] relative z-10"
+            />
+          </div>
+        </motion.div>
+
+        {/* Floor Drop-shadow (Grows and shrinks as the image 'floats') */}
+        <motion.div
+           animate={{ scale: [0.85, 1.15, 0.85], opacity: [0.2, 0.6, 0.2] }}
+           transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+           className="absolute -bottom-12 left-1/2 -translate-x-1/2 w-4/5 h-6 bg-black rounded-[100%] blur-xl"
         />
       </motion.div>
       
