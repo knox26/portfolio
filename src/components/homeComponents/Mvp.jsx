@@ -92,47 +92,54 @@ function Mvp() {
       </div>
 
       <motion.div 
-        initial={{ opacity: 0, scale: 0.9, filter: "blur(10px)", y: 0 }}
-        animate={{ opacity: 1, scale: 1, filter: "blur(0px)", y: -40 }}
+        initial={{ opacity: 0, scale: 0.9, y: 0 }}
+        animate={{ opacity: 1, scale: 1, y: -40 }}
         transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-        className="w-48 md:w-[320px] relative z-10 group"
+        className="w-56 md:w-[360px] relative z-10 group flex justify-center items-center mt-6 md:mt-0 perspective-1000"
       >
-        {/* Infinite Levitating Component */}
+        {/* Animated Blob Backdrop Glow */}
         <motion.div
-           animate={{ y: [-12, 12, -12] }}
-           transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-           className="relative"
+           animate={{ 
+             borderRadius: [
+               "60% 40% 30% 70% / 60% 30% 70% 40%",
+               "30% 70% 70% 30% / 30% 30% 70% 70%",
+               "60% 40% 30% 70% / 60% 30% 70% 40%"
+             ],
+             rotate: [0, 90, 0]
+           }}
+           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+           className="absolute -inset-4 bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 opacity-60 blur-xl group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+        />
+
+        {/* Morphing Image Blob */}
+        <motion.div
+           animate={{ 
+             borderRadius: [
+               "60% 40% 30% 70% / 60% 30% 70% 40%",
+               "30% 70% 70% 30% / 30% 30% 70% 70%",
+               "60% 40% 30% 70% / 60% 30% 70% 40%"
+             ],
+             y: [-12, 12, -12],
+             rotate: [0, -5, 0]
+           }}
+           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+           className="relative w-full aspect-square overflow-hidden bg-zinc-900 shadow-[0_0_50px_rgba(0,0,0,0.5)] z-10 border border-white/20 group-hover:border-white/50 transition-colors duration-500"
         >
-          {/* Animated Gradient Glow Border Backdrop */}
-          <motion.div
-            animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
-            className="absolute -inset-[3px] rounded-[2rem] bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 bg-[length:200%_200%] opacity-40 blur-md group-hover:opacity-70 transition-opacity duration-500"
-          />
-          {/* Tight Solid Animated Border */}
-          <motion.div
-            animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
-            className="absolute -inset-[2px] rounded-[2rem] bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 bg-[length:200%_200%]"
-          />
+          {/* Subtle inner reflection */}
+          <div className="absolute inset-0 bg-gradient-to-tl from-transparent via-white/5 to-white/20 mix-blend-overlay pointer-events-none z-20" />
           
-          {/* Core Image Container */}
-          <div className="relative bg-zinc-950 p-[3px] rounded-[2rem] overflow-hidden">
-            <img
-              src={bhaviImage}
-              alt="Profile picture of Bhavitavya"
-              width={320}
-              loading="eager"
-              className="w-full aspect-[8/9] object-cover object-top rounded-[1.8rem] relative z-10"
-            />
-          </div>
+          <img
+            src={bhaviImage}
+            alt="Profile picture of Bhavitavya"
+            className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-110 filter grayscale-[10%] group-hover:grayscale-0 relative z-10"
+          />
         </motion.div>
 
-        {/* Floor Drop-shadow (Grows and shrinks as the image 'floats') */}
+        {/* Floor Shadow */}
         <motion.div
-           animate={{ scale: [0.85, 1.15, 0.85], opacity: [0.2, 0.6, 0.2] }}
-           transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-           className="absolute -bottom-12 left-1/2 -translate-x-1/2 w-4/5 h-6 bg-black rounded-[100%] blur-xl"
+           animate={{ scale: [0.85, 1.15, 0.85], opacity: [0.2, 0.5, 0.2] }}
+           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+           className="absolute -bottom-24 left-1/2 -translate-x-1/2 w-4/5 h-6 bg-black rounded-[100%] blur-xl"
         />
       </motion.div>
       
