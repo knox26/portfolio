@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import bhaviImage from "@/assets/Bhavitavya.png";
+import bhaviImage from "@/assets/Bhavitavya.webp";
 import { FileText, Linkedin, Github, Mail } from "lucide-react";
 
 function Mvp() {
